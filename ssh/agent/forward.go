@@ -88,7 +88,7 @@ func forwardUnixSocket(channel ssh.Channel, addr string) {
 	wg.Add(2)
 	go func() {
 		io.Copy(conn, channel)
-		conn.(*net.UnixConn).CloseWrite()
+		closeWrite(conn)
 		wg.Done()
 	}()
 	go func() {
